@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:design="http://flowable.org/design" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://flowable.org/test" design:palette="flowable-process-palette">
+  <process id="parallelEventProcess" name="Parallel Event Process" isExecutable="true" flowable:candidateStarterGroups="flowableUser">
+    <extensionElements>
+      <design:stencilid><![CDATA[BPMNDiagram]]></design:stencilid>
+      <design:language><![CDATA[English]]></design:language>
+      <design:creationdate><![CDATA[2019-12-23T14:34:45.053Z]]></design:creationdate>
+      <design:modificationdate><![CDATA[2019-12-23T15:27:35.895Z]]></design:modificationdate>
+    </extensionElements>
+    <startEvent id="startnoneevent1" flowable:initiator="initiator" flowable:formFieldValidation="false">
+      <extensionElements>
+        <flowable:work-form-field-validation><![CDATA[false]]></flowable:work-form-field-validation>
+        <design:stencilid><![CDATA[StartNoneEvent]]></design:stencilid>
+      </extensionElements>
+    </startEvent>
+    <endEvent id="endNoneEvent1">
+      <extensionElements>
+        <design:stencilid><![CDATA[EndNoneEvent]]></design:stencilid>
+      </extensionElements>
+    </endEvent>
+    <sequenceFlow id="sequenceFlow1" sourceRef="startnoneevent1" targetRef="expandedSubProcess1">
+      <extensionElements>
+        <design:stencilid><![CDATA[SequenceFlow]]></design:stencilid>
+      </extensionElements>
+    </sequenceFlow>
+    <subProcess id="expandedSubProcess1" name="Subprocess">
+      <extensionElements>
+        <design:stencilid><![CDATA[ExpandedSubProcess]]></design:stencilid>
+        <design:name-run><![CDATA[Subprocess]]></design:name-run>
+      </extensionElements>
+      <startEvent id="startNoneEvent1" flowable:initiator="initiator" flowable:formFieldValidation="false">
+        <extensionElements>
+          <flowable:work-form-field-validation><![CDATA[false]]></flowable:work-form-field-validation>
+          <design:stencilid><![CDATA[StartNoneEvent]]></design:stencilid>
+        </extensionElements>
+      </startEvent>
+      <endEvent id="endNoneEvent3">
+        <extensionElements>
+          <design:stencilid><![CDATA[EndNoneEvent]]></design:stencilid>
+        </extensionElements>
+      </endEvent>
+      <serviceTask id="serviceTask2" name="Service task 1" flowable:delegateExpression="${delegate1}">
+        <extensionElements>
+          <design:stencilid><![CDATA[ServiceTask]]></design:stencilid>
+          <design:stencilsuperid><![CDATA[Task]]></design:stencilsuperid>
+          <design:name-run><![CDATA[Service task 1]]></design:name-run>
+        </extensionElements>
+      </serviceTask>
+      <sequenceFlow id="sequenceFlow6" sourceRef="startNoneEvent1" targetRef="serviceTask2">
+        <extensionElements>
+          <design:stencilid><![CDATA[SequenceFlow]]></design:stencilid>
+        </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow id="sequenceFlow7" sourceRef="serviceTask2" targetRef="endNoneEvent3">
+        <extensionElements>
+          <design:stencilid><![CDATA[SequenceFlow]]></design:stencilid>
+        </extensionElements>
+      </sequenceFlow>
+    </subProcess>
+    <sequenceFlow id="sequenceFlow2" sourceRef="expandedSubProcess1" targetRef="intermediateTimerEvent1">
+      <extensionElements>
+        <design:stencilid><![CDATA[SequenceFlow]]></design:stencilid>
+      </extensionElements>
+    </sequenceFlow>
+    <intermediateCatchEvent id="intermediateTimerEvent1">
+      <extensionElements>
+        <design:stencilid><![CDATA[IntermediateTimerEvent]]></design:stencilid>
+      </extensionElements>
+      <timerEventDefinition>
+        <timeDuration>PT30S</timeDuration>
+      </timerEventDefinition>
+    </intermediateCatchEvent>
+    <sequenceFlow id="sequenceFlow3" sourceRef="intermediateTimerEvent1" targetRef="serviceTask3">
+      <extensionElements>
+        <design:stencilid><![CDATA[SequenceFlow]]></design:stencilid>
+      </extensionElements>
+    </sequenceFlow>
+    <subProcess id="eventSubprocess1" name="subProcess" triggeredByEvent="false">
+      <extensionElements>
+        <design:stencilid><![CDATA[EventSubprocess]]></design:stencilid>
+      </extensionElements>
+      <startEvent id="startTimerEvent1" isInterrupting="true">
+        <extensionElements>
+          <design:stencilid><![CDATA[StartTimerEvent]]></design:stencilid>
+        </extensionElements>
+        <timerEventDefinition>
+          <timeDuration>PT15S</timeDuration>
+        </timerEventDefinition>
+      </startEvent>
+      <endEvent id="endNoneEvent2">
+        <extensionElements>
+          <design:stencilid><![CDATA[EndNoneEvent]]></design:stencilid>
+        </extensionElements>
+      </endEvent>
+      <serviceTask id="serviceTask1" name="Service task 3" flowable:delegateExpression="${delegate3}">
+        <extensionElements>
+          <design:stencilid><![CDATA[ServiceTask]]></design:stencilid>
+          <design:stencilsuperid><![CDATA[Task]]></design:stencilsuperid>
+          <design:name-run><![CDATA[Service task 3]]></design:name-run>
+        </extensionElements>
+      </serviceTask>
+      <sequenceFlow id="sequenceFlow4" sourceRef="startTimerEvent1" targetRef="serviceTask1">
+        <extensionElements>
+          <design:stencilid><![CDATA[SequenceFlow]]></design:stencilid>
+        </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow id="sequenceFlow5" sourceRef="serviceTask1" targetRef="endNoneEvent2">
+        <extensionElements>
+          <design:stencilid><![CDATA[SequenceFlow]]></design:stencilid>
+        </extensionElements>
+      </sequenceFlow>
+    </subProcess>
+    <serviceTask id="serviceTask3" name="Service task 2" flowable:delegateExpression="${delegate2}">
+      <extensionElements>
+        <design:stencilid><![CDATA[ServiceTask]]></design:stencilid>
+        <design:stencilsuperid><![CDATA[Task]]></design:stencilsuperid>
+        <design:name-run><![CDATA[Service task 2]]></design:name-run>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sequenceFlow8" sourceRef="serviceTask3" targetRef="endNoneEvent1">
+      <extensionElements>
+        <design:stencilid><![CDATA[SequenceFlow]]></design:stencilid>
+      </extensionElements>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_parallelEventProcess">
+    <bpmndi:BPMNPlane bpmnElement="parallelEventProcess" id="BPMNPlane_parallelEventProcess">
+      <bpmndi:BPMNShape bpmnElement="startnoneevent1" id="BPMNShape_startnoneevent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="117.0" y="261.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endNoneEvent1" id="BPMNShape_endNoneEvent1">
+        <omgdc:Bounds height="28.0" width="28.0" x="795.0" y="262.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="expandedSubProcess1" id="BPMNShape_expandedSubProcess1">
+        <omgdc:Bounds height="143.5" width="300.0" x="195.0" y="204.25"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startNoneEvent1" id="BPMNShape_startNoneEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="215.0" y="261.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endNoneEvent3" id="BPMNShape_endNoneEvent3">
+        <omgdc:Bounds height="28.0" width="28.0" x="435.0" y="262.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="serviceTask2" id="BPMNShape_serviceTask2">
+        <omgdc:Bounds height="80.0" width="100.0" x="279.0" y="236.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="intermediateTimerEvent1" id="BPMNShape_intermediateTimerEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="540.0" y="261.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="eventSubprocess1" id="BPMNShape_eventSubprocess1">
+        <omgdc:Bounds height="150.0" width="300.0" x="195.0" y="375.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startTimerEvent1" id="BPMNShape_startTimerEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="215.0" y="435.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endNoneEvent2" id="BPMNShape_endNoneEvent2">
+        <omgdc:Bounds height="28.0" width="28.0" x="435.0" y="436.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="serviceTask1" id="BPMNShape_serviceTask1">
+        <omgdc:Bounds height="80.0" width="100.0" x="295.0" y="410.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="serviceTask3" id="BPMNShape_serviceTask3">
+        <omgdc:Bounds height="80.0" width="100.0" x="623.0" y="236.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow5" id="BPMNEdge_sequenceFlow5">
+        <omgdi:waypoint x="394.95000000000005" y="450.0"></omgdi:waypoint>
+        <omgdi:waypoint x="435.0" y="450.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow6" id="BPMNEdge_sequenceFlow6">
+        <omgdi:waypoint x="244.94999813594217" y="276.0"></omgdi:waypoint>
+        <omgdi:waypoint x="278.9999999999188" y="276.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow3" id="BPMNEdge_sequenceFlow3">
+        <omgdi:waypoint x="569.9499986876858" y="276.0"></omgdi:waypoint>
+        <omgdi:waypoint x="623.0" y="276.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow4" id="BPMNEdge_sequenceFlow4">
+        <omgdi:waypoint x="244.94999861835544" y="450.0"></omgdi:waypoint>
+        <omgdi:waypoint x="295.0" y="450.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow1" id="BPMNEdge_sequenceFlow1">
+        <omgdi:waypoint x="146.94999959708815" y="276.0"></omgdi:waypoint>
+        <omgdi:waypoint x="195.0" y="276.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow2" id="BPMNEdge_sequenceFlow2">
+        <omgdi:waypoint x="494.94999999978427" y="276.0"></omgdi:waypoint>
+        <omgdi:waypoint x="540.0" y="276.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow7" id="BPMNEdge_sequenceFlow7">
+        <omgdi:waypoint x="378.9499999999756" y="276.0"></omgdi:waypoint>
+        <omgdi:waypoint x="435.0" y="276.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow8" id="BPMNEdge_sequenceFlow8">
+        <omgdi:waypoint x="722.9499999999999" y="276.0"></omgdi:waypoint>
+        <omgdi:waypoint x="795.0" y="276.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
