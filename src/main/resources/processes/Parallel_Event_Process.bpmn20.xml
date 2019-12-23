@@ -75,11 +75,11 @@
         <design:stencilid><![CDATA[SequenceFlow]]></design:stencilid>
       </extensionElements>
     </sequenceFlow>
-    <subProcess id="eventSubprocess1" name="subProcess" triggeredByEvent="false">
+    <subProcess id="eventSubprocess1" name="subProcess" triggeredByEvent="true">
       <extensionElements>
         <design:stencilid><![CDATA[EventSubprocess]]></design:stencilid>
       </extensionElements>
-      <startEvent id="startTimerEvent1" isInterrupting="true">
+      <startEvent id="startTimerEvent1" isInterrupting="false">
         <extensionElements>
           <design:stencilid><![CDATA[StartTimerEvent]]></design:stencilid>
         </extensionElements>
